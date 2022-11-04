@@ -1,5 +1,6 @@
 import './css/styles.css';
-import debounce from './modules/debounce';
+import debounce from 'lodash.debounce';
+import Notiflix from 'notiflix';
 import { fetchCountries } from './fetchCountries';
 
 const DEBOUNCE_DELAY = 300;
@@ -15,12 +16,7 @@ refs.input.addEventListener("input", debounce(onInput, DEBOUNCE_DELAY));
 function onInput(e) {
     let inputData = e.target.value.trim();
     
-    // function clearField() {
-    //     refs.countryList.innerHTML = '';
-    //     refs.countryInfo.innerHTML = '';
-    // }
-
-    // clearField();
+    clearField();
     
     if (inputData !== '') {
     fetchCountries(inputData)
@@ -35,7 +31,7 @@ function onInput(e) {
           makeCountryInfo(countries);
         }
       })
-      .catch((error) => window.alert(error));
+      .catch(error => Notiflix.Notify.failure(error));
   }
 }
 
@@ -65,4 +61,7 @@ function makeCountryInfo(countries) {
   refs.countryList.innerHTML = markup;
 }
 
-
+function clearField() {
+  refs.countryList.innerHTML = '';
+  refs.countryInfo.innerHTML = '';
+}
