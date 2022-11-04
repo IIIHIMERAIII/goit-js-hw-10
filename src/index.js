@@ -22,7 +22,7 @@ function onInput(e) {
     fetchCountries(inputData)
       .then(countries => {
         if (countries.length > 10) {
-          window.alert(
+          Notiflix.Notify.info(
             'Too many matches found. Please enter a more specific name.'
           );
         } else if (countries.length >= 2 && countries.length <= 10) {
@@ -53,9 +53,9 @@ function makeCountryInfo(countries) {
         <h1><img src="${flags.svg}" alt="Flag of ${
         name.common
       } width="30" height="30">${name.common}</h1>
-        <p><b>Capital</b>: ${capital}</p>
-        <p><b>Population</b>: ${population}</p>
-        <p><b>languages</b>: ${Object.values(languages)}</p>`;
+        <p>Capital: ${capital}</p>
+        <p>Population: ${population}</p>
+        <p>languages: ${Object.values(languages)}</p>`;
     })
     .join('');
   refs.countryList.innerHTML = markup;
